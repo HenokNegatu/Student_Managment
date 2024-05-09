@@ -9,7 +9,8 @@ public class StudentDB {
     public static void main(String[] args) throws Exception {
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);) {
             // insert(conn);
-            update(conn);
+            // update(conn);
+            isStaff(conn, "jhon", "pwd");
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -54,6 +55,28 @@ public class StudentDB {
 
             int res = stmt.executeUpdate();
             System.out.println(res);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+    }
+
+    public static void isStaff(Connection conn, String username, String passwd) {
+        String QUERY = "SELECT password FROM staff_users WHERE username = ? ";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(QUERY);
+
+            stmt.setString(1, username);
+
+            ResultSet res = stmt.executeQuery();
+            String password = null;
+            while (res.next()) {
+                password = res.getString("password");
+            }
+
+            if (passwd.equals(password)){
+                System.out.println("you can login");
+            }else{ System.out.println("incorrect credential!");}
+           
         } catch (Exception e) {
             // TODO: handle exception
         }
