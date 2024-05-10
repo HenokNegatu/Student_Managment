@@ -27,6 +27,7 @@ public class StudentDB {
             System.out.println(res);
         } catch (Exception e) {
             // TODO: handle exception
+            System.out.println(e);
         }
     }
 
@@ -42,6 +43,7 @@ public class StudentDB {
             System.out.println(res);
         } catch (Exception e) {
             // TODO: handle exception
+            System.out.println(e);
         }
     }
 
@@ -57,6 +59,7 @@ public class StudentDB {
             System.out.println(res);
         } catch (Exception e) {
             // TODO: handle exception
+            System.out.println(e);
         }
     }
 
@@ -79,6 +82,7 @@ public class StudentDB {
            
         } catch (Exception e) {
             // TODO: handle exception
+            System.out.println(e);
         }
     }
 }
