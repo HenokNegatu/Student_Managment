@@ -10,7 +10,7 @@ public class App extends Application {
 
         Parent root;
         try {
-            root = FXMLLoader.load(getClass().getResource("MainDashboardScene.fxml"));
+            root = FXMLLoader.load(getClass().getResource("./MainDashboardScene.fxml"));
             Scene scene = new Scene(root);
 
             primaryStage.setTitle("Student Managment");
@@ -19,6 +19,7 @@ public class App extends Application {
 
         } catch (Exception e) {
             // TODO: handle exception
+            e.printStackTrace();
         }
     }
 
