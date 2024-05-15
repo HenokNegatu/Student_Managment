@@ -33,12 +33,6 @@
                                     <Font name="Ubuntu Mono Regular" size="15.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="id" layoutX="134.0" layoutY="154.0" prefHeight="33.0" prefWidth="204.0" />
-                              <Label layoutX="99.0" layoutY="162.0" text="Id">
-                                 <font>
-                                    <Font name="Ubuntu Mono Regular" size="15.0" />
-                                 </font>
-                              </Label>
                               <TextField fx:id="phone" layoutX="133.0" layoutY="261.0" prefHeight="33.0" prefWidth="204.0" />
                               <Label layoutX="14.0" layoutY="269.0" text="Phone Number">
                                  <font>
@@ -76,11 +70,13 @@
                                  </font>
                               </Label>
                               <TextField layoutX="459.0" layoutY="88.0" prefHeight="33.0" prefWidth="204.0" />
+                              <TextField fx:id="id" layoutX="134.0" layoutY="146.0" prefHeight="33.0" prefWidth="204.0" />
+                              <Label layoutX="85.0" layoutY="154.0" text="Id" />
                            </children>
                         </AnchorPane>
                         <TableView fx:id="studentInfoTable" layoutX="25.0" layoutY="14.0" prefHeight="377.0" prefWidth="995.0" style="-fx-border-radius: 10px; -fx-border-color: #6600ee; -fx-border-width: 2px;">
                           <columns>
-                            <TableColumn fx:id="id" prefWidth="75.0" text="Id" />
+                            <TableColumn fx:id="idCol" prefWidth="75.0" text="Id" />
                             <TableColumn fx:id="firstnameCol" prefWidth="125.0" text="Firstname" />
                               <TableColumn fx:id="lastnameCol" prefWidth="125.0" text="Lastname" />
                               <TableColumn fx:id="genderCol" prefWidth="75.0" text="Gender" />
@@ -98,12 +94,18 @@
                <children>
                   <TableView layoutY="23.0" prefHeight="269.0" prefWidth="539.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
+                      <TableColumn fx:id="idCol2" prefWidth="60.0" text="id" />
+                      <TableColumn prefWidth="75.0" text="Course" />
+                        <TableColumn prefWidth="75.0" text="Credit hr" />
+                        <TableColumn prefWidth="60.0" text="Ects" />
+                        <TableColumn prefWidth="60.0" text="Score" />
+                        <TableColumn prefWidth="70.0" text="Grade" />
+                        <TableColumn prefWidth="70.0" text="Year" />
+                        <TableColumn prefWidth="75.0" text="Semister" />
                     </columns>
                   </TableView>
-                  <TextField layoutX="21.0" layoutY="317.0" prefHeight="33.0" prefWidth="153.0" promptText="Find by id" />
-                  <Button layoutX="188.0" layoutY="317.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="68.0" text="Search">
+                  <TextField fx:id="idDearchField" layoutX="21.0" layoutY="317.0" prefHeight="33.0" prefWidth="153.0" promptText="Find by id" />
+                  <Button fx:id="search" layoutX="188.0" layoutY="317.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="68.0" text="Search">
                      <font>
                         <Font name="Ubuntu Mono Regular" size="13.0" />
                      </font>
@@ -118,20 +120,52 @@
                         <Font name="Ubuntu Mono Regular" size="15.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="year" layoutX="278.0" layoutY="493.0" prefHeight="26.0" prefWidth="180.0" />
-                  <Label layoutX="237.0" layoutY="498.0" text="Year">
+                  <ComboBox fx:id="year" layoutX="96.0" layoutY="489.0" prefHeight="26.0" prefWidth="180.0" />
+                  <Label layoutX="55.0" layoutY="494.0" text="Year">
                      <font>
                         <Font name="Ubuntu Mono Regular" size="15.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="semister" layoutX="278.0" layoutY="540.0" prefHeight="26.0" prefWidth="180.0" />
-                  <Label layoutX="203.0" layoutY="545.0" text="Semister">
+                  <ComboBox fx:id="semister" layoutX="96.0" layoutY="536.0" prefHeight="26.0" prefWidth="180.0" />
+                  <Label layoutX="21.0" layoutY="541.0" text="Semister">
                      <font>
                         <Font name="Ubuntu Mono Regular" size="15.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="course" layoutX="278.0" layoutY="591.0" prefHeight="26.0" prefWidth="180.0" />
-                  <Label layoutX="222.0" layoutY="595.0" text="Course" />
+                  <ComboBox fx:id="course" layoutX="96.0" layoutY="587.0" prefHeight="26.0" prefWidth="180.0" />
+                  <Label layoutX="40.0" layoutY="591.0" text="Course">
+                     <font>
+                        <Font name="Ubuntu Mono Regular" size="15.0" />
+                     </font></Label>
+                  <TextField fx:id="score" layoutX="420.0" layoutY="533.0" prefHeight="26.0" prefWidth="101.0" />
+                  <Label layoutX="371.0" layoutY="537.0" text="Score">
+                     <font>
+                        <Font name="Ubuntu Mono Regular" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="ects" layoutX="420.0" layoutY="446.0" prefHeight="26.0" prefWidth="101.0" />
+                  <Label layoutX="376.0" layoutY="450.0" text="Ects">
+                     <font>
+                        <Font name="Ubuntu Mono Regular" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="creditHr" layoutX="420.0" layoutY="491.0" prefHeight="26.0" prefWidth="101.0" />
+                  <Label layoutX="338.0" layoutY="496.0" text="Credit hr">
+                     <font>
+                        <Font name="Ubuntu Mono Regular" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="id2" layoutX="96.0" layoutY="443.0" prefHeight="26.0" prefWidth="180.0" />
+                  <Label layoutX="67.0" layoutY="447.0" text="Id">
+                     <font>
+                        <Font name="Ubuntu Mono Regular" size="15.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="addCoursebtn" layoutX="109.0" layoutY="724.0" mnemonicParsing="false" onAction="#addCourse" prefHeight="42.0" prefWidth="131.0" text="Add Course">
+                     <font>
+                        <Font name="Ubuntu Mono Regular" size="15.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
          </children>

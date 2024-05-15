@@ -19,6 +19,7 @@ public class App extends Application {
 
         } catch (Exception e) {
             // TODO: handle exception
+            System.out.println(e);
         }
     }
 
