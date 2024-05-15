@@ -10,7 +10,7 @@ public class App extends Application {
         
         Parent root;
         try {
-            root = FXMLLoader.load(getClass().getResource("formScene.fxml"));
+            root = FXMLLoader.load(getClass().getResource("MainDashboardScene.fxml"));
             Scene scene = new Scene(root);
 
             primaryStage.setTitle("Student Managment");
