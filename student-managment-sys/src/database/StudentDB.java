@@ -11,6 +11,8 @@ public class StudentDB {
             // insert(conn);
             // update(conn);
             isStaff(conn, "jhon", "pwd");
+            insertCourse(conn, "Mathematics", 3, 6, "None");
+
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -79,9 +81,26 @@ public class StudentDB {
             if (passwd.equals(password)){
                 System.out.println("you can login");
             }else{ System.out.println("incorrect credential!");}
-           
+
         } catch (Exception e) {
             // TODO: handle exception
+            System.out.println(e);
+        }
+
+    }
+    public static void insertCourse(Connection conn, String courseName, int creditHour, int ects, String prerequisites) {
+        String QUERY = "INSERT INTO courses (courseName, creditHour, ects, prerequisites) VALUES(?, ?, ?, ?)";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(QUERY);
+
+            stmt.setString(1, courseName);
+            stmt.setInt(2, creditHour);
+            stmt.setInt(3, ects);
+            stmt.setString(4, prerequisites);
+
+            int res = stmt.executeUpdate();
+            System.out.println(res);
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
