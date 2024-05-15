@@ -19,7 +19,11 @@ public class App extends Application {
 
         } catch (Exception e) {
             // TODO: handle exception
+<<<<<<< HEAD
+            System.out.println(e);
+=======
             e.printStackTrace();
+>>>>>>> upstream/main
         }
     }
 
