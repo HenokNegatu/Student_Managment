@@ -166,6 +166,7 @@
                         <Font name="Ubuntu Mono Regular" size="15.0" />
                      </font>
                   </Button>
+                  <Button layoutX="471.0" layoutY="766.0" mnemonicParsing="false" onAction="#toLogin" text="Logout" />
                </children>
             </AnchorPane>
          </children>
