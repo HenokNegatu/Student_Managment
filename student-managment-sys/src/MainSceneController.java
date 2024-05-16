@@ -33,18 +33,6 @@ public class MainSceneController {
     static final String USER = "root";
     static final String PASSWORD = "";
 
-    // @Override
-    // public void initialize() {
-       
-    //     List<String> list = new ArrayList<String>();
-    //     list.add("Item A");
-    //     list.add("Item B");
-    //     list.add("Item C");
-    //     ObservableList obList = FXCollections.observableList(list);
-    //     gender.getItems().clear();
-    //     gender.setItems(obList);
-        
-    // }
 
     @FXML
     private PasswordField passwd;
@@ -84,7 +72,7 @@ public class MainSceneController {
 
                 System.out.println("incorrect credential!");
             }
-
+            
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -133,7 +121,60 @@ public class MainSceneController {
     private TableColumn<?, ?> firstnameCol;
 
     @FXML
+    public void initialize() {
+       try {
+        List<String> list = new ArrayList<String>();
+        list.add("Male");
+        list.add("Female");
+        ObservableList obList = FXCollections.observableList(list);
+        gender.getItems().clear();
+        gender.setItems(obList);
+
+        List<String> departmentList = new ArrayList<String>();
+        departmentList.add("Computer");
+        departmentList.add("Electrical");
+        departmentList.add("Mechanical");
+        departmentList.add("Hydrolics");
+        departmentList.add("Archtecture");
+        ObservableList departmentobList = FXCollections.observableList(departmentList);
+        department.getItems().clear();
+        department.setItems(departmentobList);
+
+        List<Integer> yearList = new ArrayList<Integer>();
+        yearList.add(1);
+        yearList.add(2);
+        yearList.add(3);
+        yearList.add(4);
+        yearList.add(5);
+        ObservableList yearobList = FXCollections.observableList(yearList);
+        year.getItems().clear();
+        year.setItems(yearobList);
+
+        List<Integer> semisterList = new ArrayList<Integer>();
+        semisterList.add(1);
+        semisterList.add(2);
+        ObservableList semisterobList = FXCollections.observableList(list);
+        semister.getItems().clear();
+        semister.setItems(semisterobList);
+       
+
+       List<String> courseList = new ArrayList<String>();
+        courseList.add("Advanced Programming");
+        courseList.add("Algorithm");
+        courseList.add("DLD");
+        courseList.add("Computational");
+        ObservableList courseobList = FXCollections.observableList(courseList);
+        course.getItems().clear();
+        course.setItems(courseobList);
+       }catch(Exception e){
+        System.out.println(e);
+       } 
+      
+    }
+
+    @FXML
     private ComboBox<String> gender;
+    initialize();
 
     @FXML
     private DatePicker birthdate;
