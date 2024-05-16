@@ -1,5 +1,7 @@
 import java.io.IOException;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +19,9 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public class MainSceneController {
 
@@ -28,14 +33,19 @@ public class MainSceneController {
     static final String USER = "root";
     static final String PASSWORD = "";
 
-    static Connection conn;
-    MainSceneController(){
-        try {
-            conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
-    }
+    // @Override
+    // public void initialize() {
+       
+    //     List<String> list = new ArrayList<String>();
+    //     list.add("Item A");
+    //     list.add("Item B");
+    //     list.add("Item C");
+    //     ObservableList obList = FXCollections.observableList(list);
+    //     gender.getItems().clear();
+    //     gender.setItems(obList);
+        
+    // }
+
     @FXML
     private PasswordField passwd;
 
@@ -44,8 +54,9 @@ public class MainSceneController {
 
     @FXML
     void toDashboard(ActionEvent event) throws IOException {
+        
         String QUERY = "SELECT password FROM staff_users WHERE username = ? ";
-        try {
+        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);) {
             PreparedStatement stmt = conn.prepareStatement(QUERY);
 
             stmt.setString(1, username.getText());
@@ -124,10 +135,9 @@ public class MainSceneController {
     @FXML
     private ComboBox<String> gender;
 
-
     @FXML
     private DatePicker birthdate;
-    
+
     @FXML
     private TextField email;
 
@@ -187,29 +197,30 @@ public class MainSceneController {
 
     }
 
+    
+
     @FXML
     void addStudentInfo(ActionEvent event) {
-            String QUERY = "INSERT INTO student_info " + "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-            try {
-                PreparedStatement stmt = conn.prepareStatement(QUERY);
+        String QUERY = "INSERT INTO student_info " + "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);) {
+            PreparedStatement stmt = conn.prepareStatement(QUERY);
 
-                stmt.setInt(1, id.getText());
-                stmt.setString(2, firstname.getText());
-                stmt.setString(3, lastname.getText());
-                stmt.setString(4, gender.getValue());
-                stmt.setString(5, phone.getText());
-                stmt.setString(6, department.getValue());
-                stmt.setString(7, email.getText());
-                stmt.setDate(8, birthdate.getValue());
-    
-                int res = stmt.executeUpdate();
-                System.out.println(res);
-            } catch (Exception e) {
-                // TODO: handle exception
-                System.out.println(e);
-            }
+            stmt.setInt(1, Integer.parseInt(id.getText()));
+            stmt.setString(2, firstname.getText());
+            stmt.setString(3, lastname.getText());
+            stmt.setString(4, gender.getValue());
+            stmt.setString(5, phone.getText());
+            stmt.setString(6, department.getValue());
+            stmt.setString(7, email.getText());
+            stmt.setDate(8, Date.valueOf(birthdate.getValue()));
+
+            int res = stmt.executeUpdate();
+            System.out.println(res);
+        } catch (Exception e) {
+            // TODO: handle exception
+            System.out.println(e);
         }
-    
+    }
 
     @FXML
     void deleteStudentInfo(ActionEvent event) {
