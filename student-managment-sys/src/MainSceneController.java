@@ -42,7 +42,7 @@ public class MainSceneController {
 
     @FXML
     void toDashboard(ActionEvent event) throws IOException {
-        
+
         String QUERY = "SELECT password FROM staff_users WHERE username = ? ";
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);) {
             PreparedStatement stmt = conn.prepareStatement(QUERY);
@@ -72,7 +72,7 @@ public class MainSceneController {
 
                 System.out.println("incorrect credential!");
             }
-            
+
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -153,10 +153,10 @@ public class MainSceneController {
         List<Integer> semisterList = new ArrayList<Integer>();
         semisterList.add(1);
         semisterList.add(2);
-        ObservableList semisterobList = FXCollections.observableList(list);
+        ObservableList semisterobList = FXCollections.observableList(semisterList);
         semister.getItems().clear();
         semister.setItems(semisterobList);
-       
+
 
        List<String> courseList = new ArrayList<String>();
         courseList.add("Advanced Programming");
@@ -168,8 +168,8 @@ public class MainSceneController {
         course.setItems(courseobList);
        }catch(Exception e){
         System.out.println(e);
-       } 
-      
+       }
+
     }
 
     @FXML
@@ -238,7 +238,7 @@ public class MainSceneController {
 
     }
 
-    
+
 
     @FXML
     void addStudentInfo(ActionEvent event) {
