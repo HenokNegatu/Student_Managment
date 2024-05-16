@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
@@ -32,7 +33,7 @@ public class MainSceneController {
     @FXML
     private TextField username;
 
-       
+
     @FXML
     void toDashboard(ActionEvent event) throws IOException {
         String QUERY = "SELECT password FROM staff_users WHERE username = ? ";
@@ -53,14 +54,23 @@ public class MainSceneController {
                 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
-                stage.show(); 
-            }else{ System.out.println("incorrect credential!");}
+                stage.show();
+            }else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle("Error Dialog");
+    alert.setHeaderText("Login Error");
+    alert.setContentText("Incorrect credentials!");
+
+    alert.showAndWait();
+
+    System.out.println("incorrect credential!");
+            }
 
     }catch(Exception e){
         System.out.println(e);
     }
 }
-    
+
     @FXML
     void toLogin(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("./formScene.fxml"));
