@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import database.Course;
 import database.Student;
 
 public class MainSceneController {
@@ -156,40 +157,62 @@ public class MainSceneController {
         return students;
     }
 
+    public static ObservableList<Course> getCourse() {
+
+        ObservableList<Course> courses = FXCollections.observableArrayList();
+
+        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);) {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM courses");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                courses.add(new Course(Integer.parseInt(rs.getString("id")), rs.getString("courseName"),
+                        Integer.parseInt(rs.getString("creditHour")), Integer.parseInt(rs.getString("ects")), Integer.parseInt(rs.getString("score")),
+                        rs.getString("grade"), Integer.parseInt(rs.getString("year")), Integer.parseInt(rs.getString("semester"))));
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return courses;
+    }
+
     
 
     // ******************course table *********************
 
     @FXML
-    private TableView<?> course_table;
+    private TableView<Course> course_table;
 
     @FXML
-    private TableColumn<?, ?> idCol2;
+    private TableColumn<Course, Integer> idCol2;
 
     @FXML
-    private TableColumn<?, ?> courseCol;
+    private TableColumn<Course, String> courseCol;
 
     @FXML
-    private TableColumn<?, ?> credit_hrCol;
+    private TableColumn<Course, Integer> credit_hrCol;
 
     @FXML
-    private TableColumn<?, ?> ectsCol;
+    private TableColumn<Course, Integer> ectsCol;
 
     @FXML
-    private TableColumn<?, ?> scoreCol;
+    private TableColumn<Course, Integer> scoreCol;
 
     @FXML
-    private TableColumn<?, ?> gradeCol;
+    private TableColumn<Course, String> gradeCol;
 
     @FXML
-    private TableColumn<?, ?> yearCol;
+    private TableColumn<Course, Integer> yearCol;
 
     @FXML
-    private TableColumn<?, ?> semisterCol;
+    private TableColumn<Course, Integer> semisterCol;
 
     // ********************** all combobox, table initializations ****
 
     ObservableList<Student> listStudent; 
+    ObservableList<Course> listCourse; 
     int index = -1;
     Connection conn = null;
     ResultSet rs = null;
@@ -302,6 +325,19 @@ public class MainSceneController {
 
             listStudent = getStudnetInfo();  
             studentInfoTable.setItems(listStudent);
+
+            //table
+            idCol2.setCellValueFactory(new PropertyValueFactory<Course, Integer>("id"));
+            courseCol.setCellValueFactory(new PropertyValueFactory<Course, String>("courseName"));
+            credit_hrCol.setCellValueFactory(new PropertyValueFactory<Course, Integer>("creditHour"));
+            ectsCol.setCellValueFactory(new PropertyValueFactory<Course, Integer>("ects"));
+            scoreCol.setCellValueFactory(new PropertyValueFactory<Course, Integer>("score"));
+            gradeCol.setCellValueFactory(new PropertyValueFactory<Course, String>("grade"));
+            yearCol.setCellValueFactory(new PropertyValueFactory <Course, Integer>("year"));
+            semisterCol.setCellValueFactory(new PropertyValueFactory<Course, Integer>("semester"));
+
+            listCourse = getCourse();  
+            course_table.setItems(listCourse);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -377,6 +413,8 @@ public class MainSceneController {
 
             int res = stmt.executeUpdate();
             System.out.println(res);
+            getStudnetInfo();
+            initialize();
         } catch (Exception e) {
             // TODO: handle exception
             System.out.println(e);

@@ -62,14 +62,14 @@
                                     <Font name="Ubuntu Mono Regular" size="15.0" />
                                  </font>
                               </Button>
-                              <DatePicker layoutX="458.0" layoutY="154.0" prefHeight="33.0" prefWidth="204.0" />
+                              <DatePicker fx:id="birthdate" layoutX="458.0" layoutY="154.0" prefHeight="33.0" prefWidth="204.0" />
                               <Label layoutX="397.0" layoutY="99.0" text="Email" />
                               <Label layoutX="366.0" layoutY="166.0" text="Birth date">
                                  <font>
                                     <Font name="Ubuntu Mono Regular" size="15.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="459.0" layoutY="88.0" prefHeight="33.0" prefWidth="204.0" />
+                              <TextField fx:id="email" layoutX="459.0" layoutY="88.0" prefHeight="33.0" prefWidth="204.0" />
                               <TextField fx:id="id" layoutX="134.0" layoutY="146.0" prefHeight="33.0" prefWidth="204.0" />
                               <Label layoutX="85.0" layoutY="154.0" text="Id" />
                            </children>
