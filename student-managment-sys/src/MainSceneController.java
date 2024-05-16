@@ -178,7 +178,7 @@ public class MainSceneController {
         return courses;
     }
 
-    
+
 
     // ******************course table *********************
 
@@ -211,12 +211,12 @@ public class MainSceneController {
 
     // ********************** all combobox, table initializations ****
 
-    ObservableList<Student> listStudent; 
-    ObservableList<Course> listCourse; 
+    ObservableList<Student> listStudent;
+    ObservableList<Course> listCourse;
     int index = -1;
     Connection conn = null;
     ResultSet rs = null;
-    PreparedStatement ps = null; 
+    PreparedStatement ps = null;
     @FXML
     public void initialize() {
         try {
@@ -323,7 +323,7 @@ public class MainSceneController {
             emailCol.setCellValueFactory(new PropertyValueFactory <Student, String>("email"));
             birthdateCol.setCellValueFactory(new PropertyValueFactory<Student, Date>("birthdate"));
 
-            listStudent = getStudnetInfo();  
+            listStudent = getStudnetInfo();
             studentInfoTable.setItems(listStudent);
 
             //table
@@ -336,7 +336,7 @@ public class MainSceneController {
             yearCol.setCellValueFactory(new PropertyValueFactory <Course, Integer>("year"));
             semisterCol.setCellValueFactory(new PropertyValueFactory<Course, Integer>("semester"));
 
-            listCourse = getCourse();  
+            listCourse = getCourse();
             course_table.setItems(listCourse);
         } catch (Exception e) {
             System.out.println(e);
@@ -430,4 +430,34 @@ public class MainSceneController {
     void editStudentInfo(ActionEvent event) {
 
     }
+
+    public double calculateCGPA(List<Course> courses) {
+        double totalScore = 0.0;
+        int totalCreditHours = 0;
+
+        for (Course course : courses) {
+            double scoreOutOf4 = convertScoreTo4Scale(course.getScore());
+            totalScore += scoreOutOf4 * course.getCreditHours();
+            totalCreditHours += course.getCreditHours();
+        }
+
+        return totalScore / totalCreditHours;
+    }
+
+    public double convertScoreTo4Scale(int score) {
+        if (score >= 85 && score <= 100) {
+            return 4.0;
+        } else if (score >= 70 && score < 85) {
+            return 3.0;
+        } else if (score >= 50 && score < 70) {
+            return 2.0;
+        } else if (score >= 25 && score < 50) {
+            return 1.0;
+        } else {
+            return 0.0;
+        }
+    }
+
+
+   
 }
