@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -27,17 +28,24 @@ public class MainSceneController {
     static final String USER = "root";
     static final String PASSWORD = "";
 
+    static Connection conn;
+    MainSceneController(){
+        try {
+            conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+    }
     @FXML
     private PasswordField passwd;
 
     @FXML
     private TextField username;
 
-
     @FXML
     void toDashboard(ActionEvent event) throws IOException {
         String QUERY = "SELECT password FROM staff_users WHERE username = ? ";
-        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);){
+        try {
             PreparedStatement stmt = conn.prepareStatement(QUERY);
 
             stmt.setString(1, username.getText());
@@ -48,28 +56,28 @@ public class MainSceneController {
                 password = res.getString("password");
             }
 
-            if (passwd.getText().equals(password)){
+            if (passwd.getText().equals(password)) {
                 System.out.println("you can login");
                 root = FXMLLoader.load(getClass().getResource("./MainDashboardScene.fxml"));
-                stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
-            }else{
+            } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-    alert.setTitle("Error Dialog");
-    alert.setHeaderText("Login Error");
-    alert.setContentText("Incorrect credentials!");
+                alert.setTitle("Error Dialog");
+                alert.setHeaderText("Login Error");
+                alert.setContentText("Incorrect credentials!");
 
-    alert.showAndWait();
+                alert.showAndWait();
 
-    System.out.println("incorrect credential!");
+                System.out.println("incorrect credential!");
             }
 
-    }catch(Exception e){
-        System.out.println(e);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
-}
 
     @FXML
     void toLogin(ActionEvent event) throws IOException {
@@ -87,7 +95,7 @@ public class MainSceneController {
     private Button addCoursebtn;
 
     @FXML
-    private ComboBox<?> course;
+    private ComboBox<String> course;
 
     @FXML
     private TextField creditHr;
@@ -96,7 +104,7 @@ public class MainSceneController {
     private Button deleteBtn;
 
     @FXML
-    private ComboBox<?> department;
+    private ComboBox<String> department;
 
     @FXML
     private TableColumn<?, ?> departmentCol;
@@ -114,7 +122,14 @@ public class MainSceneController {
     private TableColumn<?, ?> firstnameCol;
 
     @FXML
-    private ComboBox<?> gender;
+    private ComboBox<String> gender;
+
+
+    @FXML
+    private DatePicker birthdate;
+    
+    @FXML
+    private TextField email;
 
     @FXML
     private TableColumn<?, ?> genderCol;
@@ -153,7 +168,7 @@ public class MainSceneController {
     private Button search;
 
     @FXML
-    private ComboBox<?> semister;
+    private ComboBox<Integer> semister;
 
     @FXML
     private TableColumn<?, ?> semisterCol;
@@ -162,7 +177,7 @@ public class MainSceneController {
     private TableView<?> studentInfoTable;
 
     @FXML
-    private ComboBox<?> year;
+    private ComboBox<Integer> year;
 
     @FXML
     private TableColumn<?, ?> yearCol;
@@ -174,8 +189,27 @@ public class MainSceneController {
 
     @FXML
     void addStudentInfo(ActionEvent event) {
+            String QUERY = "INSERT INTO student_info " + "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+            try {
+                PreparedStatement stmt = conn.prepareStatement(QUERY);
 
-    }
+                stmt.setInt(1, id.getText());
+                stmt.setString(2, firstname.getText());
+                stmt.setString(3, lastname.getText());
+                stmt.setString(4, gender.getValue());
+                stmt.setString(5, phone.getText());
+                stmt.setString(6, department.getValue());
+                stmt.setString(7, email.getText());
+                stmt.setDate(8, birthdate.getValue());
+    
+                int res = stmt.executeUpdate();
+                System.out.println(res);
+            } catch (Exception e) {
+                // TODO: handle exception
+                System.out.println(e);
+            }
+        }
+    
 
     @FXML
     void deleteStudentInfo(ActionEvent event) {
