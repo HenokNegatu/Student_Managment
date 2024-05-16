@@ -16,12 +16,15 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import database.Student;
 
 public class MainSceneController {
 
@@ -106,25 +109,54 @@ public class MainSceneController {
 
     // ******************student table******************
     @FXML
-    private TableView<?> studentInfoTable;
+    private TableView<Student> studentInfoTable;
 
     @FXML
-    private TableColumn<?, ?> idCol;
+    private TableColumn<Student, Integer> idCol;
 
     @FXML
-    private TableColumn<?, ?> firstnameCol;
+    private TableColumn<Student, String> firstnameCol;
 
     @FXML
-    private TableColumn<?, ?> lastnameCol;
+    private TableColumn<Student, String> lastnameCol;
 
     @FXML
-    private TableColumn<?, ?> departmentCol;
+    private TableColumn<Student, String> genderCol;
 
     @FXML
-    private TableColumn<?, ?> genderCol;
+    private TableColumn<Student, String> phoneCol;
 
     @FXML
-    private TableColumn<?, ?> phoneCol;
+    private TableColumn<Student, String> departmentCol;
+
+    @FXML
+    private TableColumn<Student, String> emailCol;
+
+    @FXML
+    private TableColumn<Student, Date> birthdateCol;
+
+    public static ObservableList<Student> getStudnetInfo() {
+
+        ObservableList<Student> students = FXCollections.observableArrayList();
+
+        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);) {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM student_info");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                students.add(new Student(Integer.parseInt(rs.getString("id")), rs.getString("firstname"),
+                        rs.getString("lastname"), rs.getString("gender"), rs.getString("phone"),
+                        rs.getString("department"), rs.getString("email"), Date.valueOf(rs.getString("birthdate"))));
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return students;
+    }
+
+    
 
     // ******************course table *********************
 
@@ -144,15 +176,24 @@ public class MainSceneController {
     private TableColumn<?, ?> ectsCol;
 
     @FXML
+    private TableColumn<?, ?> scoreCol;
+
+    @FXML
+    private TableColumn<?, ?> gradeCol;
+
+    @FXML
     private TableColumn<?, ?> yearCol;
 
     @FXML
     private TableColumn<?, ?> semisterCol;
 
+    // ********************** all combobox, table initializations ****
 
-
-
-    // ********************** all combobox initializations ****
+    ObservableList<Student> listStudent; 
+    int index = -1;
+    Connection conn = null;
+    ResultSet rs = null;
+    PreparedStatement ps = null; 
     @FXML
     public void initialize() {
         try {
@@ -248,6 +289,19 @@ public class MainSceneController {
             ObservableList courseobList = FXCollections.observableList(courseList);
             course.getItems().clear();
             course.setItems(courseobList);
+
+            //table
+            idCol.setCellValueFactory(new PropertyValueFactory<Student, Integer>("id"));
+            firstnameCol.setCellValueFactory(new PropertyValueFactory<Student, String>("firstname"));
+            lastnameCol.setCellValueFactory(new PropertyValueFactory<Student, String>("lastname"));
+            genderCol.setCellValueFactory(new PropertyValueFactory<Student, String>("gender"));
+            phoneCol.setCellValueFactory(new PropertyValueFactory<Student, String>("phone"));
+            departmentCol.setCellValueFactory(new PropertyValueFactory<Student, String>("department"));
+            emailCol.setCellValueFactory(new PropertyValueFactory <Student, String>("email"));
+            birthdateCol.setCellValueFactory(new PropertyValueFactory<Student, Date>("birthdate"));
+
+            listStudent = getStudnetInfo();  
+            studentInfoTable.setItems(listStudent);
         } catch (Exception e) {
             System.out.println(e);
         }
