@@ -33,7 +33,6 @@ public class MainSceneController {
     static final String USER = "root";
     static final String PASSWORD = "";
 
-
     @FXML
     private PasswordField passwd;
 
@@ -105,8 +104,155 @@ public class MainSceneController {
     @FXML
     private ComboBox<String> department;
 
+    // ******************student table******************
+    @FXML
+    private TableView<?> studentInfoTable;
+
+    @FXML
+    private TableColumn<?, ?> idCol;
+
+    @FXML
+    private TableColumn<?, ?> firstnameCol;
+
+    @FXML
+    private TableColumn<?, ?> lastnameCol;
+
     @FXML
     private TableColumn<?, ?> departmentCol;
+
+    @FXML
+    private TableColumn<?, ?> genderCol;
+
+    @FXML
+    private TableColumn<?, ?> phoneCol;
+
+    // ******************course table *********************
+
+    @FXML
+    private TableView<?> course_table;
+
+    @FXML
+    private TableColumn<?, ?> idCol2;
+
+    @FXML
+    private TableColumn<?, ?> courseCol;
+
+    @FXML
+    private TableColumn<?, ?> credit_hrCol;
+
+    @FXML
+    private TableColumn<?, ?> ectsCol;
+
+    @FXML
+    private TableColumn<?, ?> yearCol;
+
+    @FXML
+    private TableColumn<?, ?> semisterCol;
+
+
+
+
+    // ********************** all combobox initializations ****
+    @FXML
+    public void initialize() {
+        try {
+            List<String> list = new ArrayList<String>();
+            list.add("Male");
+            list.add("Female");
+            ObservableList obList = FXCollections.observableList(list);
+            gender.getItems().clear();
+            gender.setItems(obList);
+
+            List<String> departmentList = new ArrayList<String>();
+            departmentList.add("Computer");
+            departmentList.add("Electrical");
+            departmentList.add("Mechanical");
+            departmentList.add("Hydrolics");
+            departmentList.add("Archtecture");
+            ObservableList departmentobList = FXCollections.observableList(departmentList);
+            department.getItems().clear();
+            department.setItems(departmentobList);
+
+            List<Integer> yearList = new ArrayList<Integer>();
+            yearList.add(1);
+            yearList.add(2);
+            yearList.add(3);
+            yearList.add(4);
+            yearList.add(5);
+            ObservableList yearobList = FXCollections.observableList(yearList);
+            year.getItems().clear();
+            year.setItems(yearobList);
+
+            List<Integer> semisterList = new ArrayList<Integer>();
+            semisterList.add(1);
+            semisterList.add(2);
+            ObservableList semisterobList = FXCollections.observableList(semisterList);
+            semister.getItems().clear();
+            semister.setItems(semisterobList);
+
+            List<String> courseList = new ArrayList<String>();
+            courseList.add("General Psychology");
+            courseList.add("Mathematics NS");
+            courseList.add("Geography");
+            courseList.add("Physics");
+            courseList.add("Critical Thinking");
+            courseList.add("English 1");
+            courseList.add("Physical Fitness");
+            courseList.add("");
+            courseList.add("Applied Math 1");
+            courseList.add("Emerging Tech");
+            courseList.add("Enterpreneurship");
+            courseList.add("Anthropology");
+            courseList.add("English 2");
+            courseList.add("Computer Programming");
+            courseList.add("Moral and Civic");
+            courseList.add("");
+            courseList.add("Engineering Drawing");
+            courseList.add("Mechanics 1");
+            courseList.add("Probability and Statistics");
+            courseList.add("Applied Math 2");
+            courseList.add("Inclusiveness");
+            courseList.add("Intro to Economics");
+            courseList.add("");
+            courseList.add("Intermidate Computer Programming");
+            courseList.add("Fundamental of EE");
+            courseList.add("Fundamental Lab");
+            courseList.add("Mechanics 2");
+            courseList.add("Applied Math 3");
+            courseList.add("Modern Physics");
+            courseList.add("Computational Methods");
+            courseList.add("");
+            courseList.add("Applied Electronics 1");
+            courseList.add("Data Structure");
+            courseList.add("Signal and System Analysis");
+            courseList.add("Computer Network 1");
+            courseList.add("Discrete Mathematics");
+            courseList.add("Database");
+            courseList.add("Electrical Workshop");
+            courseList.add("");
+            courseList.add("Algothim analysis and design");
+            courseList.add("Basics Electrical Device");
+            courseList.add("DLD");
+            courseList.add("Applied Electronics 2");
+            courseList.add("Computer Network 2");
+            courseList.add("Network Analysis");
+            courseList.add("");
+            courseList.add("Internet Programming");
+            courseList.add("Communication");
+            courseList.add("Computer Architecture and Org");
+            courseList.add("Advanced Programming");
+            courseList.add("Control and Instrumentation");
+            courseList.add("DSP");
+            courseList.add("Computer Network Security");
+
+            ObservableList courseobList = FXCollections.observableList(courseList);
+            course.getItems().clear();
+            course.setItems(courseobList);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
 
     @FXML
     private TextField ects;
@@ -118,119 +264,8 @@ public class MainSceneController {
     private TextField firstname;
 
     @FXML
-    private TableColumn<?, ?> firstnameCol;
-
-    @FXML
-    public void initialize() {
-       try {
-        List<String> list = new ArrayList<String>();
-        list.add("Male");
-        list.add("Female");
-        ObservableList obList = FXCollections.observableList(list);
-        gender.getItems().clear();
-        gender.setItems(obList);
-
-        List<String> departmentList = new ArrayList<String>();
-        departmentList.add("Computer");
-        departmentList.add("Electrical");
-        departmentList.add("Mechanical");
-        departmentList.add("Hydrolics");
-        departmentList.add("Archtecture");
-        ObservableList departmentobList = FXCollections.observableList(departmentList);
-        department.getItems().clear();
-        department.setItems(departmentobList);
-
-        List<Integer> yearList = new ArrayList<Integer>();
-        yearList.add(1);
-        yearList.add(2);
-        yearList.add(3);
-        yearList.add(4);
-        yearList.add(5);
-        ObservableList yearobList = FXCollections.observableList(yearList);
-        year.getItems().clear();
-        year.setItems(yearobList);
-
-        List<Integer> semisterList = new ArrayList<Integer>();
-        semisterList.add(1);
-        semisterList.add(2);
-        ObservableList semisterobList = FXCollections.observableList(semisterList);
-        semister.getItems().clear();
-        semister.setItems(semisterobList);
-
-
-       List<String> courseList = new ArrayList<String>();
-        courseList.add("General Psychology");
-        courseList.add("Mathematics NS");
-        courseList.add("Geography");
-        courseList.add("Physics");
-        courseList.add("Critical Thinking");
-        courseList.add("English 1");
-        courseList.add("Physical Fitness");
-        courseList.add("");
-        courseList.add("Applied Math 1");
-        courseList.add("Emerging Tech");
-        courseList.add("Enterpreneurship");
-        courseList.add("Anthropology");
-        courseList.add("English 2");
-        courseList.add("Computer Programming");
-        courseList.add("Moral and Civic");
-        courseList.add("");
-        courseList.add("Engineering Drawing");
-        courseList.add("Mechanics 1");
-        courseList.add("Probability and Statistics");
-        courseList.add("Applied Math 2");
-        courseList.add("Inclusiveness");
-        courseList.add("Intro to Economics");
-        courseList.add("");
-        courseList.add("Intermidate Computer Programming");
-        courseList.add("Fundamental of EE");
-        courseList.add("Fundamental Lab");
-        courseList.add("Mechanics 2");
-        courseList.add("Applied Math 3");
-        courseList.add("Modern Physics");
-        courseList.add("Computational Methods");
-        courseList.add("");
-        courseList.add("Applied Electronics 1");
-        courseList.add("Data Structure");
-        courseList.add("Signal and System Analysis");
-        courseList.add("Computer Network 1");
-        courseList.add("Discrete Mathematics");
-        courseList.add("Database");
-        courseList.add("Electrical Workshop");
-        courseList.add("");
-        courseList.add("Algothim analysis and design");
-        courseList.add("Basics Electrical Device");
-        courseList.add("DLD");
-        courseList.add("Applied Electronics 2");
-        courseList.add("Computer Network 2");
-        courseList.add("Network Analysis");
-        courseList.add("");
-        courseList.add("Internet Programming");
-        courseList.add("Communication");
-        courseList.add("Computer Architecture and Org");
-        courseList.add("Advanced Programming");
-        courseList.add("Control and Instrumentation");
-        courseList.add("DSP");
-        courseList.add("Computer Network Security");
-
-
-
-
-
-
-
-
-        ObservableList courseobList = FXCollections.observableList(courseList);
-        course.getItems().clear();
-        course.setItems(courseobList);
-       }catch(Exception e){
-        System.out.println(e);
-       }
-
-    }
-
-    @FXML
     private ComboBox<String> gender;
+
     initialize();
 
     @FXML
@@ -240,19 +275,10 @@ public class MainSceneController {
     private TextField email;
 
     @FXML
-    private TableColumn<?, ?> genderCol;
-
-    @FXML
     private TextField id;
 
     @FXML
     private TextField id2;
-
-    @FXML
-    private TableColumn<?, ?> idCol;
-
-    @FXML
-    private TableColumn<?, ?> idCol2;
 
     @FXML
     private TextField idDearchField;
@@ -261,13 +287,7 @@ public class MainSceneController {
     private TextField lastname;
 
     @FXML
-    private TableColumn<?, ?> lastnameCol;
-
-    @FXML
     private TextField phone;
-
-    @FXML
-    private TableColumn<?, ?> phoneCol;
 
     @FXML
     private TextField score;
@@ -279,23 +299,12 @@ public class MainSceneController {
     private ComboBox<Integer> semister;
 
     @FXML
-    private TableColumn<?, ?> semisterCol;
-
-    @FXML
-    private TableView<?> studentInfoTable;
-
-    @FXML
     private ComboBox<Integer> year;
-
-    @FXML
-    private TableColumn<?, ?> yearCol;
 
     @FXML
     void addCourse(ActionEvent event) {
 
     }
-
-
 
     @FXML
     void addStudentInfo(ActionEvent event) {

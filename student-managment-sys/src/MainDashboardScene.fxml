@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="800.0" minWidth="1600.0" prefHeight="691.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainSceneController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainSceneController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
@@ -92,14 +92,14 @@
             </AnchorPane>
             <AnchorPane layoutX="1047.0" layoutY="-3.0" prefHeight="806.0" prefWidth="555.0">
                <children>
-                  <TableView layoutY="23.0" prefHeight="269.0" prefWidth="539.0">
+                  <TableView fx:id="course_table" layoutY="23.0" prefHeight="269.0" prefWidth="539.0">
                     <columns>
                       <TableColumn fx:id="idCol2" prefWidth="60.0" text="id" />
-                      <TableColumn prefWidth="75.0" text="Course" />
-                        <TableColumn prefWidth="75.0" text="Credit hr" />
-                        <TableColumn prefWidth="60.0" text="Ects" />
-                        <TableColumn prefWidth="60.0" text="Score" />
-                        <TableColumn prefWidth="70.0" text="Grade" />
+                      <TableColumn fx:id="courseCol" prefWidth="75.0" text="Course" />
+                        <TableColumn fx:id="credit_hrCol" prefWidth="75.0" text="Credit hr" />
+                        <TableColumn fx:id="ectsCol" prefWidth="60.0" text="Ects" />
+                        <TableColumn fx:id="scoreCol" prefWidth="60.0" text="Score" />
+                        <TableColumn fx:id="grade_col" prefWidth="70.0" text="Grade" />
                         <TableColumn prefWidth="70.0" text="Year" />
                         <TableColumn prefWidth="75.0" text="Semister" />
                     </columns>
