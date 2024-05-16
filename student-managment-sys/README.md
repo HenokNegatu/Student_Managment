@@ -30,7 +30,7 @@ This Java application is a student management system that allows users to manage
 
 2. **MySQL Database**: Install and set up MySQL server.
 
-3. **MySQL Driver**: JDBC
+3. **MySQL Driver**: JDBC.
 
 4. **JavaFx JDK**
 
