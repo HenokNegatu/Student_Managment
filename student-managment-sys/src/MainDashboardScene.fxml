@@ -82,8 +82,8 @@
                               <TableColumn fx:id="genderCol" prefWidth="75.0" text="Gender" />
                               <TableColumn fx:id="phoneCol" prefWidth="130.0" text="Phone num" />
                               <TableColumn fx:id="departmentCol" prefWidth="150.0" text="Department" />
-                              <TableColumn fx:id="yearCol" prefWidth="75.0" text="Email" />
-                              <TableColumn fx:id="semisterCol" prefWidth="75.0" text="Birth Date" />
+                              <TableColumn fx:id="emailCol" prefWidth="75.0" text="Email" />
+                              <TableColumn fx:id="birthdateCol" prefWidth="75.0" text="Birth Date" />
                           </columns>
                         </TableView>
                      </children>
@@ -99,9 +99,9 @@
                         <TableColumn fx:id="credit_hrCol" prefWidth="75.0" text="Credit hr" />
                         <TableColumn fx:id="ectsCol" prefWidth="60.0" text="Ects" />
                         <TableColumn fx:id="scoreCol" prefWidth="60.0" text="Score" />
-                        <TableColumn fx:id="grade_col" prefWidth="70.0" text="Grade" />
-                        <TableColumn prefWidth="70.0" text="Year" />
-                        <TableColumn prefWidth="75.0" text="Semister" />
+                        <TableColumn fx:id="gradeCol" prefWidth="70.0" text="Grade" />
+                        <TableColumn fx:id="yearCol" prefWidth="70.0" text="Year" />
+                        <TableColumn fx:id="semisterCol" prefWidth="75.0" text="Semister" />
                     </columns>
                   </TableView>
                   <TextField fx:id="idDearchField" layoutX="21.0" layoutY="317.0" prefHeight="33.0" prefWidth="153.0" promptText="Find by id" />
