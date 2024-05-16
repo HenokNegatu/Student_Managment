@@ -15,11 +15,11 @@
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <AnchorPane layoutY="1.0" prefHeight="691.0" prefWidth="1132.0">
+            <AnchorPane layoutY="1.0" prefHeight="794.0" prefWidth="1034.0" style="-fx-border-color: blue; -fx-border-width: 0px 2px 0px 0px;">
                <children>
                   <AnchorPane prefHeight="794.0" prefWidth="1037.0" style="-fx-background-color: #efefef;">
                      <children>
-                        <AnchorPane layoutY="391.0" prefHeight="403.0" prefWidth="1047.0">
+                        <AnchorPane layoutY="391.0" prefHeight="408.0" prefWidth="1047.0">
                            <children>
                               <TextField fx:id="firstname" layoutX="133.0" layoutY="22.0" prefHeight="33.0" prefWidth="204.0" />
                               <Label layoutX="47.0" layoutY="30.0" text="Firstname">
@@ -47,17 +47,17 @@
                                     <Font name="Ubuntu Mono Regular" size="15.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="addBtn" layoutX="134.0" layoutY="332.0" mnemonicParsing="false" onAction="#addStudentInfo" prefHeight="42.0" prefWidth="121.0" text="Add">
+                              <Button fx:id="addBtn" layoutX="134.0" layoutY="332.0" mnemonicParsing="false" onAction="#addStudentInfo" prefHeight="42.0" prefWidth="121.0" style="-fx-background-color: green;" text="Add" textFill="ALICEBLUE">
                                  <font>
                                     <Font name="Ubuntu Mono Regular" size="15.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="editBtn" layoutX="291.0" layoutY="332.0" mnemonicParsing="false" onAction="#editStudentInfo" prefHeight="42.0" prefWidth="121.0" text="Edit">
+                              <Button fx:id="editBtn" layoutX="291.0" layoutY="332.0" mnemonicParsing="false" onAction="#editStudentInfo" prefHeight="42.0" prefWidth="121.0" style="-fx-background-color: blue;" text="Edit" textFill="#f8f0ff">
                                  <font>
                                     <Font name="Ubuntu Mono Regular" size="15.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="deleteBtn" layoutX="437.0" layoutY="332.0" mnemonicParsing="false" onAction="#deleteStudentInfo" prefHeight="42.0" prefWidth="121.0" text="Delete">
+                              <Button fx:id="deleteBtn" layoutX="437.0" layoutY="332.0" mnemonicParsing="false" onAction="#deleteStudentInfo" prefHeight="42.0" prefWidth="121.0" style="-fx-background-color: red;" text="Delete" textFill="#f8f0ff">
                                  <font>
                                     <Font name="Ubuntu Mono Regular" size="15.0" />
                                  </font>
@@ -92,7 +92,7 @@
             </AnchorPane>
             <AnchorPane layoutX="1047.0" layoutY="-3.0" prefHeight="806.0" prefWidth="555.0">
                <children>
-                  <TableView fx:id="course_table" layoutY="23.0" prefHeight="269.0" prefWidth="539.0">
+                  <TableView fx:id="course_table" layoutX="8.0" layoutY="24.0" prefHeight="269.0" prefWidth="539.0">
                     <columns>
                       <TableColumn fx:id="idCol2" prefWidth="60.0" text="id" />
                       <TableColumn fx:id="courseCol" prefWidth="75.0" text="Course" />
@@ -104,8 +104,8 @@
                         <TableColumn fx:id="semisterCol" prefWidth="75.0" text="Semister" />
                     </columns>
                   </TableView>
-                  <TextField fx:id="idDearchField" layoutX="21.0" layoutY="317.0" prefHeight="33.0" prefWidth="153.0" promptText="Find by id" />
-                  <Button fx:id="search" layoutX="188.0" layoutY="317.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="68.0" text="Search">
+                  <TextField fx:id="idSearchField" layoutX="21.0" layoutY="317.0" prefHeight="33.0" prefWidth="153.0" promptText="Find by id" />
+                  <Button fx:id="search" layoutX="188.0" layoutY="317.0" mnemonicParsing="false" onAction="#Search" prefHeight="33.0" prefWidth="68.0" style="-fx-background-color: blue;" text="Search" textFill="#f8f0ff">
                      <font>
                         <Font name="Ubuntu Mono Regular" size="13.0" />
                      </font>
@@ -115,7 +115,7 @@
                         <Font name="Ubuntu Mono Regular" size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="357.0" layoutY="321.0" prefHeight="26.0" prefWidth="60.0" text="0.0">
+                  <Label fx:id="cgpaValue" layoutX="357.0" layoutY="321.0" prefHeight="26.0" prefWidth="60.0" text="0.0">
                      <font>
                         <Font name="Ubuntu Mono Regular" size="15.0" />
                      </font>
@@ -132,7 +132,7 @@
                         <Font name="Ubuntu Mono Regular" size="15.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="course" layoutX="96.0" layoutY="587.0" prefHeight="26.0" prefWidth="180.0" />
+                  <ComboBox fx:id="courseName" layoutX="96.0" layoutY="587.0" prefHeight="26.0" prefWidth="180.0" />
                   <Label layoutX="40.0" layoutY="591.0" text="Course">
                      <font>
                         <Font name="Ubuntu Mono Regular" size="15.0" />
@@ -161,12 +161,12 @@
                         <Font name="Ubuntu Mono Regular" size="15.0" />
                      </font>
                   </Label>
-                  <Button fx:id="addCoursebtn" layoutX="109.0" layoutY="724.0" mnemonicParsing="false" onAction="#addCourse" prefHeight="42.0" prefWidth="131.0" text="Add Course">
+                  <Button fx:id="addCoursebtn" layoutX="109.0" layoutY="724.0" mnemonicParsing="false" onAction="#addCourse" prefHeight="42.0" prefWidth="131.0" style="-fx-background-color: green;" text="Add Course" textFill="#f8f0ff">
                      <font>
                         <Font name="Ubuntu Mono Regular" size="15.0" />
                      </font>
                   </Button>
-                  <Button layoutX="471.0" layoutY="766.0" mnemonicParsing="false" onAction="#toLogin" text="Logout" />
+                  <Button layoutX="471.0" layoutY="766.0" mnemonicParsing="false" onAction="#toLogin" style="-fx-background-color: red;" text="Logout" textFill="#f8f0ff" />
                </children>
             </AnchorPane>
          </children>
