@@ -1,5 +1,7 @@
 import java.io.IOException;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +19,9 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public class MainSceneController {
 
@@ -28,6 +33,19 @@ public class MainSceneController {
     static final String USER = "root";
     static final String PASSWORD = "";
 
+    // @Override
+    // public void initialize() {
+       
+    //     List<String> list = new ArrayList<String>();
+    //     list.add("Item A");
+    //     list.add("Item B");
+    //     list.add("Item C");
+    //     ObservableList obList = FXCollections.observableList(list);
+    //     gender.getItems().clear();
+    //     gender.setItems(obList);
+        
+    // }
+
     @FXML
     private PasswordField passwd;
 
@@ -36,6 +54,7 @@ public class MainSceneController {
 
     @FXML
     void toDashboard(ActionEvent event) throws IOException {
+        
         String QUERY = "SELECT password FROM staff_users WHERE username = ? ";
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);) {
             PreparedStatement stmt = conn.prepareStatement(QUERY);
@@ -65,12 +84,6 @@ public class MainSceneController {
 
                 System.out.println("incorrect credential!");
             }
-
-            // initializing comboboxes after success login
-            gender.getItems().addAll("male", "female");
-            gender.setValue("male");
-            year.getItems().addAll(1,2,3,4,5);
-            year.setValue(1);
 
         } catch (Exception e) {
             System.out.println(e);
@@ -183,6 +196,8 @@ public class MainSceneController {
     void addCourse(ActionEvent event) {
 
     }
+
+    
 
     @FXML
     void addStudentInfo(ActionEvent event) {
