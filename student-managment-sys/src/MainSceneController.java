@@ -12,6 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -97,7 +98,7 @@ public class MainSceneController {
     private Button addCoursebtn;
 
     @FXML
-    private ComboBox<String> course;
+    private ComboBox<String> courseName;
 
     @FXML
     private TextField creditHr;
@@ -157,12 +158,13 @@ public class MainSceneController {
         return students;
     }
 
-    public static ObservableList<Course> getCourse() {
+    public static ObservableList<Course> getCourse(int id) {
 
         ObservableList<Course> courses = FXCollections.observableArrayList();
 
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);) {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM courses");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM courses WHERE ID = ?");
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -310,8 +312,8 @@ public class MainSceneController {
             courseList.add("Computer Network Security");
 
             ObservableList courseobList = FXCollections.observableList(courseList);
-            course.getItems().clear();
-            course.setItems(courseobList);
+            courseName.getItems().clear();
+            courseName.setItems(courseobList);
 
             //table
             idCol.setCellValueFactory(new PropertyValueFactory<Student, Integer>("id"));
@@ -336,7 +338,7 @@ public class MainSceneController {
             yearCol.setCellValueFactory(new PropertyValueFactory <Course, Integer>("year"));
             semisterCol.setCellValueFactory(new PropertyValueFactory<Course, Integer>("semester"));
 
-            listCourse = getCourse();
+            listCourse = getCourse(1);
             course_table.setItems(listCourse);
         } catch (Exception e) {
             System.out.println(e);
@@ -371,7 +373,7 @@ public class MainSceneController {
     private TextField id2;
 
     @FXML
-    private TextField idDearchField;
+    private TextField idSearchField;
 
     @FXML
     private TextField lastname;
@@ -391,10 +393,12 @@ public class MainSceneController {
     @FXML
     private ComboBox<Integer> year;
 
-    @FXML
-    void addCourse(ActionEvent event) {
 
-    }
+    @FXML
+    private Label cgpaValue;
+
+
+
 
     @FXML
     void addStudentInfo(ActionEvent event) {
@@ -423,7 +427,19 @@ public class MainSceneController {
 
     @FXML
     void deleteStudentInfo(ActionEvent event) {
+        String QUERY = "DELETE FROM student_info WHERE id=?;";
+        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);) {
+            PreparedStatement stmt = conn.prepareStatement(QUERY);
 
+            stmt.setInt(1, Integer.parseInt(id.getText()));
+            int res = stmt.executeUpdate();
+            System.out.println(res);
+            getCourse(Integer.parseInt(id.getText()));
+            initialize();
+        } catch (Exception e) {
+            // TODO: handle exception
+            System.out.println(e);
+        }
     }
 
     @FXML
@@ -431,32 +447,96 @@ public class MainSceneController {
 
     }
 
-    public double calculateCGPA(List<Course> courses) {
+    @FXML
+    void addCourse(ActionEvent event) {
+        String QUERY = "INSERT INTO courses(id, courseName, creditHour, ects, score, grade, year, semester) " + "VALUES(?, ?, ?, ?, ?, ?, ?, ?);";
+        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);) {
+            PreparedStatement stmt = conn.prepareStatement(QUERY);
+
+            stmt.setInt(1, Integer.parseInt(id2.getText()));
+            stmt.setString(2, courseName.getValue());
+            stmt.setInt(3, Integer.parseInt(creditHr.getText()));
+            stmt.setInt(4, Integer.parseInt(ects.getText()));
+            stmt.setInt(5, Integer.parseInt(score.getText()));
+            stmt.setString(6, Grade(Integer.parseInt(score.getText())));
+            stmt.setInt(7, year.getValue());
+            stmt.setInt(8, semister.getValue());
+
+            int res = stmt.executeUpdate();
+            System.out.println(res);
+            getCourse(Integer.parseInt(id2.getText()));
+            initialize();
+        } catch (Exception e) {
+            // TODO: handle exception
+            System.out.println(e);
+        }
+    }
+
+    public String Grade(double score){
+        if (score >= 90) {
+            return "A";
+        } else if (score >= 80) {
+            return "B";
+        } else if (score >= 70) {
+            return "C";
+        } else if (score >= 60) {
+            return "D";
+        } else if (score >= 50) {
+            return "E";
+        } else {
+            return "F";
+        }
+    }
+
+
+    @FXML
+    void Search(ActionEvent event) {
+        String QUERY = "SELECT * FROM courses WHERE id = ?";
+
+        double cumulativeGPA =0.0;
+
+        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);) {
+            PreparedStatement ps = conn.prepareStatement(QUERY);
+            ps.setInt(1, Integer.parseInt(idSearchField.getText()));
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+            int creditHr = rs.getInt("creditHour");
+            int ects = rs.getInt("ects");
+            double score = rs.getDouble("score");
+            
+            getCourse(Integer.parseInt(idSearchField.getText()));
+            initialize();
+            // Calculate credit points for the course
+            cumulativeGPA = calculateCGPA(creditHr, ects, score);
+            
+        }
+        
+        
+        
+        // Print or use the cumulative GPA as needed
+        System.out.println("Cumulative GPA: " + cumulativeGPA);
+        cgpaValue.setText(String.valueOf(cumulativeGPA));
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public double calculateCGPA(int creditHr, int ects, double score) {
         double totalScore = 0.0;
         int totalCreditHours = 0;
 
-        for (Course course : courses) {
-            double scoreOutOf4 = convertScoreTo4Scale(course.getScore());
-            totalScore += scoreOutOf4 * course.getCreditHours();
-            totalCreditHours += course.getCreditHours();
-        }
+        double creditPoints = (score / 100.0) * ects;
+            
+            // Update total credit hours and credit points
+            totalCreditHours += creditHr;
+            totalScore += creditPoints;
 
         return totalScore / totalCreditHours;
     }
 
-    public double convertScoreTo4Scale(int score) {
-        if (score >= 85 && score <= 100) {
-            return 4.0;
-        } else if (score >= 70 && score < 85) {
-            return 3.0;
-        } else if (score >= 50 && score < 70) {
-            return 2.0;
-        } else if (score >= 25 && score < 50) {
-            return 1.0;
-        } else {
-            return 0.0;
-        }
-    }
+
 
 
    
