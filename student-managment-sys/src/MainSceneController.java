@@ -159,10 +159,67 @@ public class MainSceneController {
 
 
        List<String> courseList = new ArrayList<String>();
-        courseList.add("Advanced Programming");
-        courseList.add("Algorithm");
+        courseList.add("General Psychology");
+        courseList.add("Mathematics NS");
+        courseList.add("Geography");
+        courseList.add("Physics");
+        courseList.add("Critical Thinking");
+        courseList.add("English 1");
+        courseList.add("Physical Fitness");
+        courseList.add("");
+        courseList.add("Applied Math 1");
+        courseList.add("Emerging Tech");
+        courseList.add("Enterpreneurship");
+        courseList.add("Anthropology");
+        courseList.add("English 2");
+        courseList.add("Computer Programming");
+        courseList.add("Moral and Civic");
+        courseList.add("");
+        courseList.add("Engineering Drawing");
+        courseList.add("Mechanics 1");
+        courseList.add("Probability and Statistics");
+        courseList.add("Applied Math 2");
+        courseList.add("Inclusiveness");
+        courseList.add("Intro to Economics");
+        courseList.add("");
+        courseList.add("Intermidate Computer Programming");
+        courseList.add("Fundamental of EE");
+        courseList.add("Fundamental Lab");
+        courseList.add("Mechanics 2");
+        courseList.add("Applied Math 3");
+        courseList.add("Modern Physics");
+        courseList.add("Computational Methods");
+        courseList.add("");
+        courseList.add("Applied Electronics 1");
+        courseList.add("Data Structure");
+        courseList.add("Signal and System Analysis");
+        courseList.add("Computer Network 1");
+        courseList.add("Discrete Mathematics");
+        courseList.add("Database");
+        courseList.add("Electrical Workshop");
+        courseList.add("");
+        courseList.add("Algothim analysis and design");
+        courseList.add("Basics Electrical Device");
         courseList.add("DLD");
-        courseList.add("Computational");
+        courseList.add("Applied Electronics 2");
+        courseList.add("Computer Network 2");
+        courseList.add("Network Analysis");
+        courseList.add("");
+        courseList.add("Internet Programming");
+        courseList.add("Communication");
+        courseList.add("Computer Architecture and Org");
+        courseList.add("Advanced Programming");
+        courseList.add("Control and Instrumentation");
+        courseList.add("DSP");
+        courseList.add("Computer Network Security");
+
+
+
+
+
+
+
+
         ObservableList courseobList = FXCollections.observableList(courseList);
         course.getItems().clear();
         course.setItems(courseobList);
