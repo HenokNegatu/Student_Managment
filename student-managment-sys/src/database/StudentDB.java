@@ -1,4 +1,3 @@
-package database;
 import java.sql.*;
 import java.sql.DriverManager;
 
@@ -6,6 +5,8 @@ public class StudentDB {
     static final String DB_URL = "jdbc:mysql://localhost:3307/StudentManagment";
     static final String USER = "root";
     static final String PASSWORD = "";
+
+    
 
     public static void main(String[] args) throws Exception {
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);) {
@@ -25,7 +26,7 @@ public class StudentDB {
     }
 
     public static void insert(Connection conn) {
-        String QUERY = "INSERT INTO test " + "VALUES(?)";
+        String QUERY = "INSERT INTO student_info " + "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement stmt = conn.prepareStatement(QUERY);
 

@@ -4,16 +4,30 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainSceneController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <AnchorPane layoutX="1.0" prefHeight="545.0" prefWidth="390.0" />
+            <AnchorPane layoutX="1.0" prefHeight="600.0" prefWidth="390.0">
+               <children>
+                  <ImageView fitHeight="164.0" fitWidth="255.0" layoutX="68.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/uog.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="14.0" layoutY="246.0" prefHeight="43.0" prefWidth="363.0" text="Student Mangement" textFill="#3658c1">
+                     <font>
+                        <Font name="Ubuntu Mono Regular" size="36.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
             <AnchorPane layoutX="384.0" prefHeight="600.0" prefWidth="516.0">
                <children>
                   <Label layoutX="68.0" layoutY="116.0" text="Wellcome Back!" textFill="#3658c1">
@@ -21,17 +35,20 @@
                         <Font name="Ubuntu Regular" size="35.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="69.0" layoutY="188.0" prefHeight="42.0" prefWidth="284.0" promptText="Username" style="-fx-border-width: 0px 0px 2px 0px; -fx-background-color: #fff; -fx-border-color: #3658c1;">
+                  <TextField fx:id="username" layoutX="69.0" layoutY="188.0" prefHeight="42.0" prefWidth="284.0" promptText="Username" style="-fx-border-width: 0px 0px 2px 0px; -fx-background-color: #fff; -fx-border-color: #3658c1;">
                      <font>
                         <Font name="Ubuntu Mono Regular" size="20.0" />
                      </font>
+                     <effect>
+                        <Blend />
+                     </effect>
                   </TextField>
-                  <PasswordField layoutX="68.0" layoutY="268.0" prefHeight="42.0" prefWidth="284.0" promptText="Password" style="-fx-border-color: #3658c1; -fx-border-width: 0px 0px 2px 0px; -fx-background-color: #fff;">
+                  <PasswordField fx:id="passwd" layoutX="68.0" layoutY="268.0" prefHeight="42.0" prefWidth="284.0" promptText="Password" style="-fx-border-color: #3658c1; -fx-border-width: 0px 0px 2px 0px; -fx-background-color: #fff;">
                      <font>
                         <Font name="Ubuntu Mono Regular" size="20.0" />
                      </font>
                   </PasswordField>
-                  <Button layoutX="68.0" layoutY="354.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="284.0" style="-fx-background-color: #3658c1;" text="Login" textFill="#f8f0ff" />
+                  <Button layoutX="68.0" layoutY="354.0" mnemonicParsing="false" onAction="#toDashboard" prefHeight="35.0" prefWidth="284.0" style="-fx-background-color: #3658c1;" text="Login" textFill="#f8f0ff" />
                </children>
             </AnchorPane>
          </children>
