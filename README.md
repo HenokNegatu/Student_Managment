@@ -1,5 +1,10 @@
 # Student Management System
 
+#### Login
+![Login](images/login.png)
+#### Main Dashboard
+![Dashboard](images/dashboard.png)
+
 This Java application is a student management system that allows users to manage student information, including adding, updating, deleting, and searching student records. It also supports managing course records, recording scores for courses, and calculating the CGPA (Cumulative Grade Point Average) of students.
 
 ## Features
